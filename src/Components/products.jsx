@@ -122,7 +122,6 @@ const Products = (props) => {
     axios
       .request(options)
       .then(function (response) {
-        // console.log(`response.data: ${JSON.stringify(response.data)}`);
         restockProducts(response.data); // Response
       })
       .catch(function (error) {
@@ -132,13 +131,12 @@ const Products = (props) => {
 
   const restockProducts = (data) => {
     let productData = data.data.products.data;
-    //console.log(`productData: ${JSON.stringify(productData)}`);
+    console.log(`productData: ${JSON.stringify(productData)}`);
     const newItems = productData.map((item) => {
       let { name, instock } = item.attributes;
       return { name, instock };
     });
     const allItems = [...items, ...newItems];
-    //console.log(allItems); // [{name: 'Apples', country: 'Italy', cost: 3, instock: 2}, {name: 'Oranges', country: 'Spain', cost: 4, instock: 1}, {name: 'Beans', country: 'USA', cost: 2, instock: 8}, {name: 'Cabbage', country: 'USA', cost: 1, instock: 3}, {name: 'Apples', country: 'Italy', cost: 3, instock: 10}, {name: 'Oranges', country: 'Spain', cost: 4, instock: 3}, {name: 'Beans', country: 'USA', cost: 2, instock: 8}, {name: 'Cabbage', country: 'USA', cost: 1, instock: 8}]
     // Combine Duplicates
     let uniqueItems = [];
     allItems.forEach((item) => {
